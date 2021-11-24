@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        const rock = -1;
+        const paper = 0;
+        const scissors = 1;
+
+        const humanWins = "You won against the computer!";
+        const compWins = "You lost against the computer :(";
+        const tie = "You tied agains the computer :/ "
+        
+        function computerPlay() {
+            return Math.floor(Math.random() * 3) - 1;
+        }
+
+        function humanPlay(promptInput) {
+            let input = promptInput.toUpperCase()
+            if(input === "ROCK") {
+                return rock;
+            } else if(input === "PAPER") {
+                return paper;
+            } else if(input === "SCISSORS") {
+                return scissors;
+            } else {
+                alert("You can only put in: rock, paper, or scissors.");
+            }
+        }
+
+        function returnWinner(humanSelection, computerSelection) {
+            if(humanSelection == computerSelection) {
+                return tie
+            } else {
+                if(humanSelection == rock) {
+                    if(computerSelection == paper){
+                        return compWins
+                    } return humanWins
+                } else if(humanSelection == paper) {
+                    if(computerSelection == rock) {
+                        return humanWins
+                    } return compWins
+                } else { //human selection is scissors
+                    if(computerSelection == rock) {
+                        return compWins
+                    } return humanWins
+                }
+            }
+        }
+
+        function game() {
+            let humanInput = prompt("What do you choose out of: Rock, Paper, Scissors?");
+            return returnWinner(humanPlay(humanInput), computerPlay());
+        }
+
+        console.log(game())
+    </script>
+</body>
+</html>
