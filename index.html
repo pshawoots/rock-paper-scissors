@@ -39,16 +39,16 @@
             } else {
                 if(humanSelection == rock) {
                     if(computerSelection == paper){
-                        return compWins
-                    } return humanWins
+                        return "Computer played paper: " + compWins;
+                    } return "Computer played scissors: " + humanWins;
                 } else if(humanSelection == paper) {
                     if(computerSelection == rock) {
-                        return humanWins
-                    } return compWins
+                        return "Computer played rock: " + humanWins;
+                    } return "Computer played scissor: " + compWins;
                 } else { //human selection is scissors
                     if(computerSelection == rock) {
-                        return compWins
-                    } return humanWins
+                        return "Computer played rock: " + compWins;
+                    } return "Computer played paper: " + humanWins;
                 }
             }
         }
