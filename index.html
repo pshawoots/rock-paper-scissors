@@ -6,8 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
 </head>
+<button id="rock" class="input">Rock</button>
+<button id="paper" class="input">Paper</button>
+<button id="scissors" class="input">Scissors</button>
+
+<div id="computer" class="score">Computer Score: 0</div>
+<div id="human" class="score">Human Score: 0</div>
+
 <body>
     <script>
+        var computerScore = 0;
+        var humanScore = 0;
         const rock = -1;
         const paper = 0;
         const scissors = 1;
@@ -15,6 +24,41 @@
         const humanWins = "You won against the computer!";
         const compWins = "You lost against the computer :(";
         const tie = "You tied agains the computer :/ "
+
+        const inputs = document.querySelectorAll(`.input`)
+        inputs.forEach(input => input.addEventListener('click', function(e) {
+            console.log(returnWinner(humanPlay(input.id), computerPlay()));            
+            if(computerScore == 5){
+                setTimeout(function () { 
+                    alert("You have lost against the computer! :( Scores will now reset.")
+                    humanScore = 0;
+                    computerScore = 0;
+                    computerScoreText.innerHTML = "Computer Score: " + 0;
+                    humanScoreText.innerHTML = "Human Score: " + 0;}, 500);
+            } else if(humanScore == 5){
+                setTimeout(function () { 
+                    alert("You have won against the computer! Scores will now reset.")
+                    humanScore = 0;
+                    computerScore = 0;
+                    computerScoreText.innerHTML = "Computer Score: " + 0;
+                    humanScoreText.innerHTML = "Human Score: " + 0;}, 500);
+            }
+        }));
+
+        const humanScoreText = document.querySelector('#human');
+        const computerScoreText = document.querySelector('#computer');
+
+        function computerWin() {
+            computerScore = computerScore + 1;
+            computerScoreText.innerHTML = "Computer Score: " + computerScore;
+
+        }
+
+        function humanWin() {
+            humanScore = humanScore + 1;
+            humanScoreText.innerHTML = "Human Score: " + humanScore;
+
+        }
         
         function computerPlay() {
             return Math.floor(Math.random() * 3) - 1;
@@ -39,26 +83,28 @@
             } else {
                 if(humanSelection == rock) {
                     if(computerSelection == paper){
+                        computerWin();
                         return "Computer played paper: " + compWins;
-                    } return "Computer played scissors: " + humanWins;
+                    }
+                    humanWin(); 
+                    return "Computer played scissors: " + humanWins;
                 } else if(humanSelection == paper) {
                     if(computerSelection == rock) {
+                        humanWin();
                         return "Computer played rock: " + humanWins;
-                    } return "Computer played scissor: " + compWins;
+                    } 
+                    computerWin();
+                    return "Computer played scissor: " + compWins;
                 } else { //human selection is scissors
                     if(computerSelection == rock) {
+                        computerWin();
                         return "Computer played rock: " + compWins;
-                    } return "Computer played paper: " + humanWins;
+                    } 
+                    humanWin();
+                    return "Computer played paper: " + humanWins;
                 }
             }
         }
-
-        function game() {
-            let humanInput = prompt("What do you choose out of: Rock, Paper, Scissors?");
-            return returnWinner(humanPlay(humanInput), computerPlay());
-        }
-
-        console.log(game())
     </script>
 </body>
 </html>
